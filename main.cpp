@@ -39,12 +39,22 @@ int main() {
 
     // World
     hittable_list world;
+    /*
+    world.add(make_shared<sphere>(point3(-0.3,0,-1.5),0.5, make_shared<lambertian>(color(0.3,0.6,0.5)))); //
     world.add(make_shared<sphere>(point3(0.7,0,-1),0.5, make_shared<metal>(color(0.8,0.8,0.8))));
     world.add(make_shared<sphere>(point3(1.5,0,1),0.4, make_shared<lambertian>(color(0.8,0.3,0.5))));
     world.add(make_shared<sphere>(point3(-1.7,0,-1.2),0.5, make_shared<metal>(color(0.2,0.2,0.5))));
-    world.add(make_shared<sphere>(point3(-0.3,0,-1.5),0.5, make_shared<lambertian>(color(0.3,0.6,0.5)))); //
     world.add(make_shared<sphere>(point3(-2,0,-2.5),0.5, make_shared<metal>(color(0.4,0.9,0.4))));
     world.add(make_shared<sphere>(point3(0,-100.5,-1),100, make_shared<lambertian>(color(0.7,0.7,0.7))));
+    */
+
+    world.add(make_shared<sphere>(point3(0,-100.5,-1),100, make_shared<lambertian>(color(0.8,0.8,0.0))));
+    //world.add(make_shared<sphere>(point3(0,0,-1),0.5, make_shared<lambertian>(color(0.7,0.3,0.3))));
+    world.add(make_shared<sphere>(point3(0,0,-1),0.5, make_shared<dilectric>(1.5)));
+    world.add(make_shared<sphere>(point3(0,0,-1),-0.49, make_shared<dilectric>(1.5)));
+    world.add(make_shared<sphere>(point3(-1,0,-1),0.5, make_shared<metal>(color(0.8,0.8,0.8), 0.3)));
+    world.add(make_shared<sphere>(point3(1,0,-1),0.5, make_shared<metal>(color(0.8,0.6,0.2), 1.0)));
+
 
     // Camera
     camera cam;

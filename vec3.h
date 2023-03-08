@@ -21,7 +21,7 @@ public:
     double y() const { return e[1]; }
     double z() const { return e[2]; }
 
-    vec3 operator-() { return vec3(-e[0], -e[1], -e[2]); }
+    vec3 operator-() const { return vec3(-e[0], -e[1], -e[2]); } //TODO const or not const?
     double operator[](int i) const { return e[i]; }
     double& operator[](int i) {return e[i]; }
 
@@ -136,6 +136,13 @@ vec3 random_unit_vector() {
 
 vec3 reflect(const vec3 &v, const vec3 &n) {
     return v - 2*dot(v,n)*n;
+}
+
+vec3 refract(const vec3 &uv, const vec3 &n, double etai_over_etat) {
+    auto cos_theta = fmin(dot(-uv,n), 1.0);
+    vec3 r_out_perp = etai_over_etat * (uv + cos_theta*n);
+    vec3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+    return r_out_perp + r_out_parallel;
 }
 
 #endif //RAYTRACING_VEC3_H
